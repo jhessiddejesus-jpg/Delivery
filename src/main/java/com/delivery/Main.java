@@ -15,7 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Crear restaurante
+        // ______________________________
+        // CREAMOS RESTAURANTE
+        // ______________________________
         Restaurante restaurante = new Restaurante(
                 1,
                 "Sabor Colombiano",
@@ -23,7 +25,9 @@ public class Main {
                 "3001234567"
         );
 
-        // Crear platos
+        // _______________________________
+        // CREAMOS PLATOS
+
         Plato hamburguesa = new Plato(
                 1,
                 "Hamburguesa",
@@ -38,16 +42,29 @@ public class Main {
                 25000
         );
 
-        // Servicio restaurante
+        //________________________________
+        // SERVICIO RESTAURANTE
+        //________________________________
+
         ServicioRestaurante servicioRestaurante =
                 new ServicioRestaurante();
 
-        servicioRestaurante.agregarPlato(restaurante, hamburguesa);
-        servicioRestaurante.agregarPlato(restaurante, pizza);
+        servicioRestaurante.agregarPlato(
+                restaurante,
+                hamburguesa
+        );
+
+        servicioRestaurante.agregarPlato(
+                restaurante,
+                pizza
+        );
 
         servicioRestaurante.mostrarMenu(restaurante);
 
-        // Crear cliente
+        // ________________________________
+        // CREAR CLIENTE
+        //________________________________
+
         Cliente cliente = new Cliente(
                 1,
                 "Jhessid",
@@ -56,14 +73,20 @@ public class Main {
                 "Calle 10 # 5-20"
         );
 
-        // Crear pedido
+        // _______________________________
+        // CREAR PEDIDO
+        // _______________________________
+
         Pedido pedido = new Pedido(
                 1,
                 cliente,
                 restaurante
         );
 
-        // Servicio pedido
+        // _______________________________
+        // SERVICIO PEDIDO
+        // _______________________________
+
         ServicioPedido servicioPedido =
                 new ServicioPedido();
 
@@ -79,7 +102,10 @@ public class Main {
                 1
         );
 
-        // Crear envio
+        // ________________________________
+        // CREAR ENVIO
+        // ________________________________
+
         Envio envio = new Envio(
                 1,
                 cliente.getDireccion(),
@@ -88,7 +114,10 @@ public class Main {
 
         pedido.crearEnvio(envio);
 
-        // Crear repartidor
+        // ________________________________
+        // CREAR REPARTIDOR
+        // ________________________________
+
         Repartidor repartidor =
                 new RepartidorMoto(
                         1,
@@ -97,34 +126,73 @@ public class Main {
                         40
                 );
 
-        // Servicio de envio
+        // ________________________________
+        // SERVICIO DE ENVIO
+        // ________________________________
+
         ServicioEnvio servicioEnvio =
                 new ServicioEnvio();
 
+        // Asignar repartidor
         servicioEnvio.asignarRepartidor(
                 envio,
                 repartidor
         );
 
-        servicioEnvio.iniciarEnvio(envio);
+        // ________________________________
+        // CONFIRMAR PEDIDO
+        // ________________________________
 
-        // Confirmar pedido
         servicioPedido.confirmarPedido(pedido);
 
-        // Mostrar informacion
+        // ________________________________
+        // MOSTRAR INFORMACION DEL PEDIDO
+        // ________________________________
+
         System.out.println();
-        System.out.println("PEDIDO ");
-        System.out.println("Cliente: " + cliente.getNombre());
-        System.out.println("Subtotal: $" + pedido.getSubtotal());
-        System.out.println("Costo envío: $" + pedido.getCostoEnvio());
-        System.out.println("Total: $" + pedido.getTotal());
-        System.out.println("Estado pedido: " + pedido.getEstado());
+        System.out.println("      PEDIDO      ");
+
+        System.out.println(
+                "Cliente: " + cliente.getNombre()
+        );
+
+        System.out.println(
+                "Subtotal: $" + pedido.getSubtotal()
+        );
+
+        System.out.println(
+                "Costo envio: $" + pedido.getCostoEnvio()
+        );
+
+        System.out.println(
+                "Total: $" + pedido.getTotal()
+        );
+
+        System.out.println(
+                "Estado pedido: " + pedido.getEstado()
+        );
+
+        // ________________________________
+        // INICIAR ENVIO
+        // ________________________________
+
+        servicioEnvio.iniciarEnvio(envio);
 
         servicioEnvio.mostrarEstado(envio);
 
-        // Entregar
-        servicioEnvio.entregarEnvio(envio);
+        // ________________________________
+        // ESPERAR ENTREGA
+        // ________________________________
+
+        servicioEnvio.esperarEntrega(envio);
+
+        // ________________________________
+        // MOSTRAR ESTADO FINAL
+        // ________________________________
 
         servicioEnvio.mostrarEstado(envio);
+
+        System.out.println();
+        System.out.println("      FIN DEL PEDIDO      ");
     }
 }
